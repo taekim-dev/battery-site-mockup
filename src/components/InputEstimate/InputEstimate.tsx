@@ -12,7 +12,6 @@ import {
 import QuantityInput from "./QuantityInput";
 import { DevicesContext } from "../Context/DevicesContext";
 import { LayoutVisibilityContext } from "../Context/LayoutVisibilityContextType";
-//import LabelledImage from '../Utils/LabelledImage';
 
 function InputEstimate(): JSX.Element {
   const deviceContext = useContext(DevicesContext);
@@ -36,7 +35,6 @@ function InputEstimate(): JSX.Element {
     const newDevices = [...devices];
     newDevices[index].quantity = quantity;
 
-    // Calculate the total quantity of other devices
     const totalOtherDevices = newDevices.reduce((total, device) => {
       if (device.deviceName !== "Transformer") {
         total += device.quantity;
@@ -44,7 +42,6 @@ function InputEstimate(): JSX.Element {
       return total;
     }, 0);
 
-    // Update the Transformer device
     const transformerIndex = newDevices.findIndex(
       (device) => device.deviceName === "Transformer"
     );
@@ -57,7 +54,7 @@ function InputEstimate(): JSX.Element {
   };
 
   const resetQuantities = () => {
-    setLayoutVisible(false); // Hide the layout grid
+    setLayoutVisible(false);
 
     const newDevices = devices.map((device) => ({ ...device, quantity: 0 }));
     setDevices(newDevices);
@@ -77,21 +74,21 @@ function InputEstimate(): JSX.Element {
   );
 
   return (
-    <Box display="flex" flexDirection="column" justifyContent="space-between">
+    <Box display="flex" flexDirection="column" height="100%" overflow="auto">
       {/* EnergyPriceLabels */}
       <Box display="flex" justifyContent="space-around" mb={2}>
         <Box>
           <Box height="1.5rem">
             <Typography
               align="center"
-              variant="subtitle1"
+              variant="subtitle2"
               color="text.secondary"
             >
               Energy
             </Typography>
           </Box>
           <Box width="15rem">
-            <Typography align="center" variant="h4">
+            <Typography align="center" variant="h5">
               {totalEnergy} MWh
             </Typography>
           </Box>
@@ -100,14 +97,14 @@ function InputEstimate(): JSX.Element {
           <Box height="1.5rem">
             <Typography
               align="center"
-              variant="subtitle1"
+              variant="subtitle2"
               color="text.secondary"
             >
               Price
             </Typography>
           </Box>
           <Box width="15rem">
-            <Typography align="center" variant="h4">
+            <Typography align="center" variant="h5">
               ${totalPrice.toLocaleString()}
             </Typography>
           </Box>
@@ -115,97 +112,78 @@ function InputEstimate(): JSX.Element {
       </Box>
 
       {/* BatteryTable */}
-      <TableContainer
-        component={Paper}
-        sx={{ borderTop: "1px solid rgba(0, 0, 0, 0.12)" }}
-      >
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                <Typography variant="h6">Device Name</Typography>
-              </TableCell>
-              <TableCell align="left">
-                <Typography variant="h6">
-                  Floor Dimension <br /> (width x height in feet)
-                </Typography>
-              </TableCell>
-              <TableCell align="center">
-                <Typography variant="h6">Quantity</Typography>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {devices.map((device, index) => (
+      <Box flexGrow={1} overflow="auto">
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>
+                  <Typography variant="subtitle1">Device Name</Typography>
+                </TableCell>
+                <TableCell align="left">
+                  <Typography variant="subtitle1">
+                    Floor Dimension <br /> (w x h in feet)
+                  </Typography>
+                </TableCell>
+                <TableCell align="center">
+                  <Typography variant="subtitle1">Quantity</Typography>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {devices.map((device, index) => (
               <TableRow
                 key={device.deviceName}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
-                  <Typography variant="h6">{device.deviceName}</Typography>
+                <TableCell component="th" scope="row" sx={{ padding: "0.25rem 0.5rem" }}>
+                  <Typography variant="subtitle1">{device.deviceName}</Typography>
                 </TableCell>
 
-                <TableCell align="left">
+                <TableCell align="left" sx={{ padding: "0.25rem 0.5rem" }}>
                   <Box display="flex" alignItems="center">
                     <img
                       src={device.image}
                       alt={device.deviceName}
                       style={{
-                        height: "50px",
+                        height: "40px",
                         width: "auto",
                         marginRight: "20px",
                       }}
                     />
-                    <Typography variant="h6">{device.dimension}</Typography>
+                    <Typography variant="subtitle1">{device.dimension}</Typography>
                   </Box>
                 </TableCell>
-                <TableCell align="center">
-                  {device.deviceName === "Transformer" ? (
-                    <Typography variant="h6">{device.quantity}</Typography>
-                  ) : (
-                    <QuantityInput
-                      defaultValue={device.quantity}
-                      onQuantityChange={(quantity) =>
-                        handleQuantityChange(quantity, index)
-                      }
-                    />
-                  )}
-                </TableCell>
+                <TableCell align="center" sx={{ padding: "0.25rem 0.5rem" }}>
+                {device.deviceName === "Transformer" ? (
+                  <Typography variant="subtitle1" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '3.5rem' }}>
+                    {device.quantity}
+                  </Typography>
+                ) : (
+                  <QuantityInput
+                    defaultValue={device.quantity}
+                    onQuantityChange={(quantity) =>
+                      handleQuantityChange(quantity, index)
+                    }
+                  />
+                )}
+              </TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
 
       {/* Layout Button */}
-      <Box display="flex" justifyContent="center" mt={4}>
-        {/* <Button
-          variant="outlined"
-          color="primary"
-          size="medium"
-          disabled={totalQuantity === 0}
-          sx={{
-            fontSize: "1.2rem",
-            padding: "0.7em",
-            border: 2,
-            marginRight: "1em",
-          }}
-          onClick={() => {
-            setLayoutVisible(true);
-            setCommittedDevices(devices.map((device) => ({ ...device }))); // deep copy
-          }}
-        >
-          {layoutVisibilityContext.layoutVisible
-            ? "Update Layout"
-            : "View Layout"}
-        </Button> */}
-
+      <Box display="flex" justifyContent="center" mt={2}>
         <Button
           variant="outlined"
-          color="secondary"
-          size="medium"
+          color="primary"
+          size="small"
           disabled={totalQuantity === 0}
-          sx={{ fontSize: "1.2rem", padding: "0.7em", border: 2 }}
+          sx={{ fontSize: "1rem", padding: "0.5em", border: 2 }}
           onClick={resetQuantities}
         >
           Reset

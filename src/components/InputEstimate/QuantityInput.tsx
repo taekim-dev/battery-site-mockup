@@ -57,7 +57,8 @@ function QuantityInput({ defaultValue, onQuantityChange }: QuantityInputProps): 
         sx: {
           width: '8em',
           color: 'black',
-          fontSize: '1.5em',
+          height: '3.5rem',
+          fontSize: '1.2em',
           borderColor: 'darkgray',
           '& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button': {
             '-webkit-appearance': 'none',

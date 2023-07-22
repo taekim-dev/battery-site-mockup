@@ -33,7 +33,7 @@ function MainPage(): JSX.Element {
               border={1}
               m={2}
               width="50%"
-              maxHeight="calc(100vh - 120px - 2rem)"
+              maxHeight="calc(100vh - 120px)"
               overflow="scroll"
             >
               <BatteryLayout />
@@ -42,7 +42,8 @@ function MainPage(): JSX.Element {
               border={0}
               m={2}
               width="50%"
-              maxHeight="calc(100vh - 120px - 2rem)"
+              maxHeight="calc(100vh - 120px)"
+              
             >
               <InputEstimate />
             </Box>
