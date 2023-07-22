@@ -12,7 +12,7 @@ function RightPanel(): JSX.Element {
   
     return (
       <Box>
-        <Box display="flex" justifyContent="center" >
+        <Box display="flex" justifyContent="center" mb={2} >
           <ToggleButtonGroup
             color="primary"
             value={view}

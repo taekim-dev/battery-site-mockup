@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Box } from "@mui/material";
 import Header from "./Header";
 import BatteryLayout from "./BatteryLayout/BatteryLayout";
-//import RightPanel from './RightPanel';
 import { DevicesContext, Device } from "./Context/DevicesContext";
 import { LayoutVisibilityContext } from "./Context/LayoutVisibilityContextType";
 import devicesData from "./Context/devices.json";
-import InputEstimate from "./InputEstimate/InputEstimate";
+//import InputEstimate from "./InputEstimate/InputEstimate";
+import RightPanel from "./RightPanel";
 
 function MainPage(): JSX.Element {
   const [devices, setDevices] = useState<Device[]>(
@@ -45,7 +45,7 @@ function MainPage(): JSX.Element {
               maxHeight="calc(100vh - 120px)"
               
             >
-              <InputEstimate />
+              <RightPanel />
             </Box>
           </Box>
         </Box>
