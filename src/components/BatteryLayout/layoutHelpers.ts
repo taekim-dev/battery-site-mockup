@@ -5,7 +5,7 @@ export function formDeviceRows(
   maxRowWidth: number
 ): Device[][] {
   const deviceRows: Device[][] = [];
-  const currentRowWidths: number[] = [];
+  const remainingRowSpaces: number[] = [];
 
   // First, flatten the devices array to account for quantities
   const flatDevices: Device[] = [];
@@ -18,14 +18,15 @@ export function formDeviceRows(
   // Sort the flatDevices array by width in decreasing order
   flatDevices.sort((a, b) => b.width - a.width);
 
-  flatDevices.forEach((device) => {
-    let placed = false;
+  for (let i = 0; i < flatDevices.length; i++) {
+    let device = flatDevices[i];
 
-    // Try to fit the device into each row in order
-    for (let i = 0; i < deviceRows.length; i++) {
-      if (currentRowWidths[i] + device.width <= maxRowWidth) {
-        deviceRows[i].push(device);
-        currentRowWidths[i] += device.width;
+    // Check if the device can be placed in existing row
+    let placed = false;
+    for (let j = 0; j < remainingRowSpaces.length; j++) {
+      if (device.width <= remainingRowSpaces[j]) {
+        deviceRows[j].push(device);
+        remainingRowSpaces[j] -= device.width;
         placed = true;
         break;
       }
@@ -34,9 +35,17 @@ export function formDeviceRows(
     // If the device didn't fit into any row, create a new row
     if (!placed) {
       deviceRows.push([device]);
-      currentRowWidths.push(device.width);
+      remainingRowSpaces.push(maxRowWidth - device.width);
     }
-  });
+
+    // Sort the rows by remaining space in ascending order
+    let combined = deviceRows.map((row, idx) => ({row, space: remainingRowSpaces[idx]}));
+    combined.sort((a, b) => a.space - b.space);
+    for (let j = 0; j < combined.length; j++) {
+      deviceRows[j] = combined[j].row;
+      remainingRowSpaces[j] = combined[j].space;
+    }
+  }
 
   return deviceRows;
 }
