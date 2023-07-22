@@ -1,4 +1,3 @@
-// Calculations.test.tsx
 import { calculateTotalEnergy, calculateTotalPrice, calculateTotalQuantity } from './Calculations';
 
 describe("Device Calculations", () => {

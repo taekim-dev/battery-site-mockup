@@ -1,17 +1,10 @@
 import { useContext, useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from "@mui/material";
 import QuantityInput from "./QuantityInput";
 import { DevicesContext } from "../Context/DevicesContext";
 import { LayoutVisibilityContext } from "../Context/LayoutVisibilityContextType";
+import { calculateTotalEnergy, calculateTotalPrice, calculateTotalQuantity } from './Calculations';
 
 function InputEstimate(): JSX.Element {
   const deviceContext = useContext(DevicesContext);
@@ -60,18 +53,9 @@ function InputEstimate(): JSX.Element {
     setDevices(newDevices);
   };
 
-  const totalEnergy = devices.reduce(
-    (total, device) => total + device.quantity * device.energy,
-    0
-  );
-  const totalPrice = devices.reduce(
-    (total, device) => total + device.quantity * device.cost,
-    0
-  );
-  const totalQuantity = devices.reduce(
-    (total, device) => total + device.quantity,
-    0
-  );
+  const totalEnergy = calculateTotalEnergy(devices);
+  const totalPrice = calculateTotalPrice(devices);
+  const totalQuantity = calculateTotalQuantity(devices);
 
   return (
     <Box display="flex" flexDirection="column" height="100%" overflow="auto">
