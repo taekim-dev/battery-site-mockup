@@ -1,6 +1,12 @@
-# Industrial Energy Battery Site Layout Tool
+# Battery Site Mockup
 
-The Industrial Energy Battery Site Layout Tool is a user-friendly application that enables users to create mockups of site layouts for industrial energy battery installations. By providing their desired battery configuration, the tool generates an interactive, visual representation of the battery site. Additionally, the tool offers estimates for cost, land usage, and energy output based on the user's input.
+The Battery Site Mockup is a user-friendly application that enables users to create mockups of site layouts for industrial energy battery installations. By providing their desired battery configuration, the tool generates an interactive, visual representation of the battery site. The tool also provides estimates for cost, land usage, and energy output based on the user's input.
+
+## Tech Stack
+
+- TypeScript
+- Material UI
+- React.js
 
 ## Installation & Running
 
