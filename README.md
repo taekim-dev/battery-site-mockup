@@ -1,31 +1,34 @@
 # Battery Site Mockup
 
-The Battery Site Mockup is a user-friendly application that enables users to create mockups of site layouts for industrial energy battery installations. By providing their desired battery configuration, the tool generates an interactive, visual representation of the battery site. The tool also provides estimates for cost, land usage, and energy output based on the user's input.
+The Battery Site Mockup is an intuitive application designed for creating visual mockups of site layouts for industrial energy battery installations.
 
 ## Tech Stack
-
-- TypeScript
-- Material UI
-- React.js
+- Frontend: TypeScript, Material UI, React.js
+- Backend: Express.js 
+- Testing: Jest (frontend), Mocha (backend)
+  - Refer to [Battery Mockup API](https://github.com/taekim-dev/battery-mockup-api) for backend details.
 
 ## Installation & Running
 
-To run the project locally, follow these steps:
+1. Clone the repository:
+    ```
+    git clone https://github.com/taekim-dev/battery-site-mockup.git
+    ```
+2. Navigate into the directory:
+    ```
+    cd battery-site-mockup
+    ```
+3. Install dependencies:
+    ```
+    npm install
+    ```
+4. Start the local server:
+    ```
+    npm run dev
+    ```
+Access the server at `http://localhost:8000`.
 
-### 1. Clone the repository:
-
-git clone https://github.com/taekim-dev/battery-site-mockup.git
-
-### 2. Navigate into the project directory:
-
-cd battery-site-mockup
-
-### 3. Install the project dependencies:
-
-npm install
-
-### 4. Start the local development server:
-
-npm run dev
-
-After running the command, the server will start at http://localhost:8000.
+## Future Enhancements
+- **Budget Page**: Input budget to receive optimal device selection and layout.
+- **Save Function**: Save current data for future reference.
+- **Share Function**: Export and share layout and energy and price data.  
