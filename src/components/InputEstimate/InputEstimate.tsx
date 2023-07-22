@@ -122,7 +122,7 @@ function InputEstimate(): JSX.Element {
                 </TableCell>
                 <TableCell align="left">
                   <Typography variant="subtitle1">
-                    Floor Dimension <br /> (w x h in feet)
+                    Floor Dimension (w x h in feet)
                   </Typography>
                 </TableCell>
                 <TableCell align="center">
@@ -136,11 +136,11 @@ function InputEstimate(): JSX.Element {
                 key={device.deviceName}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row" sx={{ padding: "0.25rem 0.5rem" }}>
+                <TableCell component="th" scope="row" sx={{ padding: "0.25rem 1rem" }}>
                   <Typography variant="subtitle1">{device.deviceName}</Typography>
                 </TableCell>
 
-                <TableCell align="left" sx={{ padding: "0.25rem 0.5rem" }}>
+                <TableCell align="left" sx={{ padding: "0.25rem 1rem" }}>
                   <Box display="flex" alignItems="center">
                     <img
                       src={device.image}
@@ -154,7 +154,7 @@ function InputEstimate(): JSX.Element {
                     <Typography variant="subtitle1">{device.dimension}</Typography>
                   </Box>
                 </TableCell>
-                <TableCell align="center" sx={{ padding: "0.25rem 0.5rem" }}>
+                <TableCell align="center" sx={{ padding: "0.25rem 3rem" }}>
                 {device.deviceName === "Transformer" ? (
                   <Typography variant="subtitle1" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '3.5rem' }}>
                     {device.quantity}
