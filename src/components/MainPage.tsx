@@ -1,19 +1,28 @@
-import { useState } from "react";
-import { Box } from "@mui/material";
-import Header from "./Header";
-import BatteryLayout from "./BatteryLayout/BatteryLayout";
-import { DevicesContext, Device } from "./Context/DevicesContext";
-import { LayoutVisibilityContext } from "./Context/LayoutVisibilityContextType";
-import devicesData from "./Context/devices.json";
-import InputEstimate from "./InputEstimate/InputEstimate";
-//import RightPanel from "./RightPanel";
+import { useState, useEffect } from 'react';
+import { Box } from '@mui/material';
+import Header from './Header';
+import BatteryLayout from './BatteryLayout/BatteryLayout';
+import { DevicesContext, Device } from './Context/DevicesContext';
+import { LayoutVisibilityContext } from './Context/LayoutVisibilityContextType';
+import InputEstimate from './InputEstimate/InputEstimate';
 
 function MainPage(): JSX.Element {
-  const [devices, setDevices] = useState<Device[]>(
-    devicesData.map((device) => ({ ...device, quantity: 0 }))
-  );
+  const [devices, setDevices] = useState<Device[]>([]);
   const [committedDevices, setCommittedDevices] = useState<Device[]>([]);
   const [layoutVisible, setLayoutVisible] = useState(false);
+
+  useEffect(() => {
+    fetch('https://battery-mockup-api.glitch.me/devices')
+      .then(response => response.json())
+      .then(data => {
+        const updatedDevices = data.map((device: Device) => ({ ...device, quantity: 0 }));
+        setDevices(updatedDevices);
+        setCommittedDevices(updatedDevices);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, []);
 
   const handleCommit = () => {
     setCommittedDevices(devices);
@@ -33,7 +42,7 @@ function MainPage(): JSX.Element {
               border={1}
               m={2}
               width="50%"
-              maxHeight="calc(100vh - 120px)"
+              maxHeight="calc(100vh - 120px - 2rem)"
               overflow="scroll"
             >
               <BatteryLayout />
@@ -42,8 +51,7 @@ function MainPage(): JSX.Element {
               border={0}
               m={2}
               width="50%"
-              maxHeight="calc(100vh - 120px)"
-              
+              maxHeight="calc(100vh - 120px - 2rem)"
             >
               <InputEstimate />
             </Box>
