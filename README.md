@@ -12,6 +12,8 @@ The Battery Site Mockup is an intuitive application designed for creating visual
 
 ## Installation & Running
 
+**Note:** The first time you run this app, allow it about 5 seconds to fully load as the Glitch backend server wakes up from its sleep mode due to inactivity. If the images do not load initially, simply refresh the page after 5 seconds.
+
 1. Clone the repository:
     ```
     git clone https://github.com/taekim-dev/battery-site-mockup.git
@@ -44,8 +46,7 @@ Access the server at `http://localhost:8000`.
 - The total quantity of battery devices could be large.
 - The width of the layout does not exceed 100ft.
 
-
 ## Future Enhancements
 - **Budget Page**: Input budget to receive optimal device selection and layout.
 - **Save Function**: Save current data for future reference.
-- **Share Function**: Export and share layout and energy and price data.  
+- **Share Function**: Export and share layout and energy and price data.
